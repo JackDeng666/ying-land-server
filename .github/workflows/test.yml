@@ -1,0 +1,24 @@
+name: Test
+
+# 执行 CI 的时机: 当 git push 到 test 分支时
+on:
+  push:
+    branches:    
+      - test
+
+# 执行所有的 jobs
+jobs:
+  deploy:
+    # 该 Job 在自建的 Runner 中执行
+    runs-on: self-hosted
+    steps:
+      - name: Deploy
+        run: |
+          cd /root/ying-land-server
+          pwd
+          git checkout test
+          git pull
+          yarn
+          npm run build
+          docker-compose up -d --build ying-land-server-test
+          docker rmi $(docker images -f "dangling=true" -q)
