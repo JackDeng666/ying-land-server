@@ -1,0 +1,26 @@
+version: "3"
+services:
+  ying-land-server-main:
+    environment:
+      NODE_ENV: prod
+    build:
+      context: .
+      dockerfile: docker-ying-land-server.Dockerfile
+    # ports:
+    #   - 3060:3060
+    labels:
+      - "traefik.http.routers.nav.rule=Host(`api.ying-land.top`)"
+  ying-land-server-test:
+    environment:
+      NODE_ENV: test
+    build:
+      context: .
+      dockerfile: docker-ying-land-server.Dockerfile
+    # ports:
+    #   - 3070:3060
+    labels:
+      - "traefik.http.routers.nav.rule=Host(`test-api.ying-land.top`)"
+networks:
+  default:
+    external:
+      name: traefik_default
