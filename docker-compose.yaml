@@ -9,7 +9,7 @@ services:
     # ports:
     #   - 3060:3060
     labels:
-      - "traefik.http.routers.nav.rule=Host(`api.ying-land.top`)"
+      - "traefik.http.routers.api.rule=Host(`api.ying-land.top`)"
   ying-land-server-test:
     environment:
       NODE_ENV: test
@@ -19,7 +19,7 @@ services:
     # ports:
     #   - 3070:3060
     labels:
-      - "traefik.http.routers.nav.rule=Host(`test-api.ying-land.top`)"
+      - "traefik.http.routers.test-api.rule=Host(`test-api.ying-land.top`)"
 networks:
   default:
     external:
